@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1><i class="fas fa-chart-line"></i> Análise Financeira</h1>
+            <p class="subtitle">Faça upload do seu extrato bancário para obter insights sobre seus gastos</p>
+        </header>
+        
+        <div class="upload-section">
+            <div class="upload-card">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h2>Upload do Extrato Bancário</h2>
+                <form id="uploadForm">
+                    <div class="file-input-wrapper">
+                        <label for="bankStatement" class="file-input-label">
+                            <span id="fileNameDisplay">Escolher Arquivo</span>
+                            <i class="fas fa-file-upload"></i>
+                        </label>
+                        <input type="file" id="bankStatement" accept=".csv,.xlsx">
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-analytics"></i>
+                        Analisar
+                    </button>
+                </form>
+                <div id="loadingIndicator" class="loading-indicator">
+                    <div class="spinner"></div>
+                    <span>Processando seu arquivo...</span>
+                </div>
+                <div id="errorDisplay" class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="results-section" style="display: none;">
+            <div class="summary-box">
+                <h3><i class="fas fa-wallet"></i> Resumo Financeiro</h3>
+                <div class="summary-grid">
+                    <div id="totalSpent" class="summary-item"></div>
+                    <div id="totalReceived" class="summary-item"></div>
+                    <div id="netBalance" class="summary-item"></div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card categories-card">
+                    <h3><i class="fas fa-tags"></i> Categorias de Gastos</h3>
+                    <div id="categoryBreakdown" class="category-list"></div>
+                </div>
+
+                <div class="card category-analysis-card">
+                    <h3><i class="fas fa-chart-pie"></i> Análise de Categorias</h3>
+                    <div id="topCategories" class="insights-group"></div>
+                    <div id="categoryAlerts" class="insights-group"></div>
+                </div>
+
+                <div class="card patterns-card">
+                    <h3><i class="fas fa-calendar"></i> Padrões de Gasto</h3>
+                    <div id="weeklyTrends" class="insights-group"></div>
+                    <div id="dailyPatterns" class="insights-group"></div>
+                </div>
+
+                <div class="card transactions-card">
+                    <h3><i class="fas fa-exchange-alt"></i> Análise de Transações</h3>
+                    <div id="frequentPlaces" class="insights-group"></div>
+                    <div id="largeExpenses" class="insights-group"></div>
+                </div>
+            </div>
+
+            <div class="recommendations-section">
+                <h3><i class="fas fa-lightbulb"></i> Recomendações</h3>
+                <div id="recommendationsList" class="recommendations-grid"></div>
+            </div>
+
+            <div class="charts-section">
+                <div class="card chart-card">
+                    <h3><i class="fas fa-chart-pie"></i> Distribuição de Gastos</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html> 
